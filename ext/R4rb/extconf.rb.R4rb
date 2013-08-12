@@ -1,0 +1,65 @@
+#
+# $Date: 2003/08/17 03:04:32 $
+# $Author: yoshi $
+#
+
+require "mkmf"
+
+$CFLAGS = "-I/usr/local/lib/R/include -I."
+$LDFLAGS = "-L/usr/local/lib"
+$libs = "-lR"
+
+modules = ""
+
+File.unlink("Makefile") if (FileTest.exist? "Makefile")
+File.unlink("Makefile.init") if (FileTest.exist? "Makefile.init")
+File.unlink("Makefile.eval") if (FileTest.exist? "Makefile.eval")
+
+header = nil
+
+$objs = ["R4rbInit.o"]
+
+create_makefile("R4rbInit")
+File.rename("Makefile", "Makefile.init")
+modules = modules + "R4rbInit.#{CONFIG['DLEXT']}"
+
+$objs = ["R4rbEval.o"]
+create_makefile("R4rbEval")
+File.rename("Makefile", "Makefile.eval")
+modules = "R4rbEval.#{CONFIG['DLEXT']} " + modules
+
+open("Makefile", "w") {|f|
+  v = $nmake ? '{$(srcdir)}' : ''
+  f.write <<"MAKEFILE"
+SHELL = /bin/sh
+srcdir = #{$srcdir}
+VPATH = $(srcdir)
+
+all: #{modules}
+
+R4rbInit.#{CONFIG['DLEXT']}: #{v}R4rbInit.c
+	@echo Now Making R4rbInit extend module
+	@$(MAKE) -f Makefile.init
+
+R4rbEval.#{CONFIG['DLEXT']}: #{v}R4rbEval.c
+	@echo Now Making R4rbEval extend module
+	@$(MAKE) -f Makefile.eval
+
+clean:
+#{"\t@$(MAKE) -f Makefile.init clean"}
+#{"\t@$(MAKE) -f Makefile.eval clean"}
+
+distclean:
+#{"\t@$(MAKE) -f Makefile.init distclean"}
+#{"\t@$(MAKE) -f Makefile.eval distclean"}
+
+install: #{modules}
+#{"\t@$(MAKE) -f Makefile.init install"}
+#{"\t@$(MAKE) -f Makefile.eval install"}
+
+site-install: #{modules}
+#{"\t@$(MAKE) -f Makefile.init site-install"}
+#{"\t@$(MAKE) -f Makefile.eval site-install"}
+MAKEFILE
+}
+
