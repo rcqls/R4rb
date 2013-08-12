@@ -24,6 +24,6 @@ a <- iris[[1]]
 REND
 
 R4rb < "a"
-``
+```
 
 Notice that only R vector are converted to ruby object!
