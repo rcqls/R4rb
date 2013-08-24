@@ -20,3 +20,8 @@ end
 puts "calcul de runif(10)"
 a=[] < 'runif(10)'
 p a
+a.map!{|e| e*2}
+
+a > 'b'
+
+p 'b'.to_R

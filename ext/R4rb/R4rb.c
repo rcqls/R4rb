@@ -367,7 +367,12 @@ VALUE RVect_isValid(VALUE self)
   ans = util_getVar(self);
 #endif
   if(!util_isVector(ans)) {
-    rb_warn("%s is not a R vector !!!",name);
+#ifndef cqls
+    VALUE tmp;
+    tmp=rb_iv_get(self,"@name");
+    name = StringValuePtr(tmp);
+#endif
+    rb_warn("%s is not a R vector !!!",name); //TODO name not defined
     return Qfalse;
   }
   return Qtrue;
