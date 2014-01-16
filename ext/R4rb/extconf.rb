@@ -12,6 +12,7 @@ def find_installed_R
     $prefix_lib=nil
     ["","i386","x64"].each do |arch|
         $prefix_lib=File.join($prefix,"bin",arch) if File.exists? File.join($prefix,"bin",arch,"R.dll")
+        #$versions=[arch]
         break if $prefix_lib
     end
   elsif RUBY_PLATFORM=~/darwin/
@@ -87,9 +88,12 @@ end
 ## R is installed?
 find_installed_R
 
-$prefix,$prefix_include,$prefix_lib,$versions=[$prefix],[$prefix_include],[$prefix_lib],["orig"] unless $versions
+$versions=["orig"] unless $versions
+$prefix,$prefix_include,$prefix_lib=[$prefix],[$prefix_include],[$prefix_lib] unless $prefix.is_a? Array
 
 modules = ""
+
+p $versions
 
 File.unlink("Makefile") if (FileTest.exist? "Makefile")
 $versions.each_with_index {|version,i| 
@@ -97,7 +101,7 @@ $versions.each_with_index {|version,i|
     r4rb_makefile($prefix_include[i],$prefix_lib[i],version)
     rb4r_name="R4rb"+((version and version!="orig") ? "."+version : "" )
     modules += " #{rb4r_name}.#{CONFIG['DLEXT']}"
-    FileUtils.cp "R4rb.c", "#{rb4r_name}.c" 
+    FileUtils.cp "R4rb.c", "#{rb4r_name}.c" if "R4rb.c" != "#{rb4r_name}.c"
 }
 
 open("Makefile", "w") {|f|

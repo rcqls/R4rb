@@ -1,5 +1,8 @@
 #!/bin/bash
 dir=`dirname $0`
+realpath() {
+  ruby -e "puts File.expand_path \"$1\""
+}
 dir=`realpath $dir`
 echo "$dir"
 ln -sf $dir/Rserv ~/bin/Rserv

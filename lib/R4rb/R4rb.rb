@@ -135,4 +135,29 @@ class Array
     #p @@rb2R
   end
 
+  ## Here again to make this package self-content
+  def rb2R=(mode=nil)
+    ##puts "rb2R mode #{object_id}";p mode
+    mode=R4rb unless mode
+    return if @rb2R_mode and @rb2R_mode==mode
+    @rb2R_mode=mode unless @rb2R_mode
+    @rb2R=(@rb2R_mode==Rserve ? Rserve::RVector.new("") :  R2rb::RVector.new("") )
+    ##puts "rb2R=";p @rb2R
+  end
+
+  def >(outR) #outR represents here an R object
+    self.rb2R=nil unless @rb2R
+    @rb2R << outR
+    @rb2R < self
+    return self
+  end
+
+  def <(outR) #outR represents here an R expression to execute and put inside the Array
+    #p @rb2R
+    self.rb2R=nil unless @rb2R
+    @rb2R << outR
+    @rb2R > self
+    return self
+  end
+
 end

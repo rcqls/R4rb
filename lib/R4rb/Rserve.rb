@@ -11,7 +11,7 @@ module Rserve
   		!Rserve.pid.empty?
   	end
 
-  	def Rserve.start(rserve=File.expand_path("~/bin/Rserve"))
+  	def Rserve.start(rserve=File.expand_path("~/bin/Rserv"))
   		`R CMD #{rserve}` unless Rserve.running?
   	end
 
@@ -150,7 +150,8 @@ module Rserve
 		cli=Rserve.cli unless cli
 		code="RSassign(#{cli},#{code})"
 		#p code
-		R2rb << code
+		#R2rb << code ###????
+		Rserve << code
 	end
 
 	class RVector < R2rb::RVector

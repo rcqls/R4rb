@@ -14,6 +14,20 @@ found=nil
 	end
 	break if found
 end
+# unless found #windows case
+# 	["i386","x64"].each do |version|
+# 		["","../ext/R4rb"].each do |path|
+# 			lib=File.join(File.dirname(__FILE__),path,'R4rb.'+version+'.so')
+# 			if File.exists? lib
+# 				puts "#{lib} found"
+# 				require lib
+# 				found=true
+# 				break
+# 			end
+# 		end
+# 	end
+# end
+
 require 'R4rb.so' unless found
 
 # loading ruby files

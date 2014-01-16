@@ -1,9 +1,16 @@
 #!/bin/bash
 ## Rmk: IMPORTANT, $0 does not have the same name as the binary Rserve!!!
 
-pid=`ps -C Rserve -o pid=`
+pid=`pgrep -x Rserve` #`ps -C Rserve -o pid=`
 
 #echo "<<$pid>>"
+
+
+rservePath=`Rscript -e "cat(system.file(\"libs\",version[[\"arch\"]],\"Rserve\",package=\"Rserve\"))"`
+
+if [ "$rservePath" == "" ]; then
+	rservePath=`Rscript -e "cat(system.file(\"Rserve\",package=\"Rserve\"))"`
+fi
 
 case $1 in
 status)
@@ -15,18 +22,18 @@ status)
 	;;
 start)
 	if [ "$pid" = "" ]; then
-		R CMD ${R_LIBS_USER}/Rserve/Rserve
-		##echo "Rserve started!"
+		R CMD $rservePath
+		##echo "Rserv started!"
 	else
-		echo "Rserve already started!"
+		echo "Rserv already started!"
 	fi
 	;;
 stop)
 	if [ "$pid" = "" ]; then
-		echo "Rserve already stopped!"
+		echo "Rserv already stopped!"
 	else
 		kill $pid 
-		echo "Rserve stopped!"
+		echo "Rserv stopped!"
 	fi
 	;;
 esac
