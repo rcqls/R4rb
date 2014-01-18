@@ -39,12 +39,21 @@ opt={};ARGV.select{|e| e=~/\=/ }.each{|e| tmp= e.split("=");opt[tmp[0]]=tmp[1]}
 PKGDIR=opt["pkgdir"] || ENV["RUBYGEMS_PKGDIR"]  || "pkg"
 PKGDIR=opt["pkgdir"] if opt["pkgdir"]
 
-## gem task!!!
+## OLD: gem task!!!
+# desc "Create #{PKG_NAME+'-'+PKG_VERSION+'.gem'}" 
+# Gem::PackageTask.new(spec) do |pkg|
+#    pkg.package_dir=PKGDIR
+#    pkg.need_zip = false
+#     pkg.need_tar = false
+# end
+
+
+# it is less verbose than the previous one
 desc "Create #{PKG_NAME+'-'+PKG_VERSION+'.gem'}" 
-Gem::PackageTask.new(spec) do |pkg|
-   pkg.package_dir=PKGDIR
-   pkg.need_zip = false
-    pkg.need_tar = false
+task :package do |t|
+  #Gem::Builder.new(spec_client).build
+  Gem::Package.build(spec)
+  `mv #{PKG_NAME+'-'+PKG_VERSION+'.gem'} #{PKGDIR}`
 end
 
 ## clean task
