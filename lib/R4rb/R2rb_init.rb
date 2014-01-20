@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 ##  Attention "...\n..." have to be replaced by "...\\n..."
 ## example : 'cat("toto\n")' fails but not 'cat("toto\\n")'
 ## more surprisingly, this fails even in comment '# cat("toto\n")'

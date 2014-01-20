@@ -589,7 +589,7 @@ Init_R4rb()
   rb_define_method(cRVect,"valid?",RVect_isValid,0);
   rb_define_method(cRVect,"length",RVect_length,0);
   rb_define_method(cRVect,"[]",RVect_aref,1);
-  //[]= ��iter !!!
+  //[]= iter !!!
   rb_define_attr(cRVect,"name",1,1);
   rb_define_attr(cRVect,"type",1,1);
 }

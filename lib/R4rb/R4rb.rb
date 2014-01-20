@@ -1,3 +1,4 @@
+# encoding: utf-8
 class Object
 
   def R4rb_is(mode)

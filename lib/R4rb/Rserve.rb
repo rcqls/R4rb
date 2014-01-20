@@ -1,3 +1,4 @@
+# encoding: utf-8
 ### IMPORTANT, no use of R4rb tools! R2rb or Rserve mode only!
 
 module Rserve
