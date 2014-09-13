@@ -1,5 +1,5 @@
 # encoding: UTF-8
-Encoding.default_external = Encoding::UTF_8
+Encoding.default_external = Encoding::UTF_8 unless RUBY_VERSION =~ /1\.8/
 # loading library: compatible for ruby-1.8.7, ruby-1.9.3, ruby-2.0.0
 if RUBY_PLATFORM=~/mingw32/ #because I did not manage to execute the same on mingw32
   #   cmd=begin `Rscript`; rescue; "undefined";end

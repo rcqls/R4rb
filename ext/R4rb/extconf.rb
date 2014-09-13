@@ -65,7 +65,7 @@ def find_installed_R
     raise RuntimeError, "couldn't find R Home : R seems to be uninstalled!!" unless $prefix
     raise RuntimeError, "couldn't find R.h!!" unless $prefix_include
     raise RuntimeError, "couldn't find libR.so!!" unless $prefix_lib
-    return multi
+    #return multi
   end  
 
 end
