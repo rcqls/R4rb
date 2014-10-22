@@ -7,7 +7,7 @@ require 'fileutils' #if RUBY_VERSION < "1.9"
 
 def find_installed_R
 
-  if RUBY_PLATFORM=~/mingw32/
+  if RUBY_PLATFORM=~/mingw/ or RUBY_PLATFORM=~/msys/
     $prefix=`R RHOME`.gsub("\\","/")
     $prefix_include=$prefix+"/include"
     $prefix_lib=nil

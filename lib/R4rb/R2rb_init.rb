@@ -86,7 +86,7 @@ end
 
 def find_installed_R
 
-  if RUBY_PLATFORM=~/mingw32/
+  if RUBY_PLATFORM=~/mingw/ or RUBY_PLATFORM=~/msys/
      ENV["R_HOME"]=`R RHOME`
   elsif RUBY_PLATFORM=~/darwin/
     ENV["R_HOME"]=`R RHOME`.strip
