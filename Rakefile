@@ -52,6 +52,10 @@ PKGDIR=opt["pkgdir"] if opt["pkgdir"]
 desc "Create #{PKG_NAME+'-'+PKG_VERSION+'.gem'}" 
 task :package do |t|
   #Gem::Builder.new(spec_client).build
+  unless File.directory? PKGDIR
+    require 'fileutils'
+    FileUtils.mkdir_p PKGDIR
+  end
   Gem::Package.build(spec)
   `mv #{PKG_NAME+'-'+PKG_VERSION+'.gem'} #{PKGDIR}`
 end
