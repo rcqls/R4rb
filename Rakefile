@@ -76,7 +76,7 @@ end
 
 ## quick install task
 desc "Quick install #{File.join(PKGDIR,PKG_NAME+'-'+PKG_VERSION+'.gem')}"
-task :install do |t|
+task :install => :package do |t|
   `gem install #{File.join(PKGDIR,PKG_NAME+'-'+PKG_VERSION+'.gem')} --local --no-rdoc --no-ri`
   rm_rf File.join(PKGDIR,PKG_NAME+'-'+PKG_VERSION) if File.exists? File.join(PKGDIR,PKG_NAME+'-'+PKG_VERSION)
 end
