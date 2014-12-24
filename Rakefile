@@ -81,6 +81,12 @@ task :install => :package do |t|
   rm_rf File.join(PKGDIR,PKG_NAME+'-'+PKG_VERSION) if File.exists? File.join(PKGDIR,PKG_NAME+'-'+PKG_VERSION)
 end
 
+desc "Docker install #{File.join(PKGDIR,PKG_NAME+'-'+PKG_VERSION+'.gem')}"
+task :docker => :package do |t|
+  `gem install #{File.join(PKGDIR,PKG_NAME+'-'+PKG_VERSION+'.gem')} --local --no-rdoc --no-ri`
+  rm_rf File.join(PKGDIR,PKG_NAME+'-'+PKG_VERSION) if File.exists? File.join(PKGDIR,PKG_NAME+'-'+PKG_VERSION)
+end
+
 
 ## binary task (mainly for Windows binary)
 spec_bin=Gem::Specification.new do |s|
