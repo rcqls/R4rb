@@ -11,7 +11,7 @@ def find_installed_R
     $prefix=`R RHOME`.gsub("\\","/")
     $prefix_include=$prefix+"/include"
     $prefix_lib=nil
-    ["","i386","x64"].each do |arch|
+    ["","x64","i386"].each do |arch|
         $prefix_lib=File.join($prefix,"bin",arch) if File.exists? File.join($prefix,"bin",arch,"R.dll")
         #$versions=[arch]
         break if $prefix_lib
