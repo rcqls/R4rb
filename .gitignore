@@ -1,4 +1,5 @@
 *.exe
+*.gem
 *.dll
 *.do
 *.o

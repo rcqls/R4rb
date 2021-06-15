@@ -2,7 +2,7 @@ require 'rubygems'
 require 'rubygems/package_task'
 
 pkg_NAME='R4rb'
-pkg_VERSION='1.0.1'
+pkg_VERSION='1.1.0'
 pkg_FILES=FileList[
     'Rakefile','R4rb.gemspec',
     'ext/R4rb/*.c',
