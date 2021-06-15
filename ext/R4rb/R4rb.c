@@ -7,6 +7,7 @@
 #include <string.h>
 
 #include "ruby.h"
+#include "ruby/version.h"
 #include <R.h>
 #include <Rinternals.h>
 #include <Rdefines.h>
@@ -209,7 +210,7 @@ SEXP util_eval1string(VALUE cmd)
 
 int util_isVector(SEXP ans)
 {
-  return (!isNewList(ans) & isVector(ans));
+  return ((!isNewList(ans)) & isVector(ans));
 }
 
 int util_isVariable(VALUE self)
@@ -321,7 +322,11 @@ SEXP util_VALUE2SEXP(VALUE arr)
     for(i=0;i<n;i++) {
       REAL(ans)[i]=NUM2DBL(rb_ary_entry(arr,i));
     }
+#if RUBY_API_VERSION_CODE >= 20400
+  } else if(class==rb_cInteger) {
+#else
   } else if(class==rb_cFixnum || class==rb_cBignum) {
+#endif
     PROTECT(ans=allocVector(INTSXP,n));
     for(i=0;i<n;i++) {
       INTEGER(ans)[i]=NUM2INT(rb_ary_entry(arr,i));
