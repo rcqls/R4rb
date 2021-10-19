@@ -17,17 +17,18 @@ def find_installed_R
         break if $prefix_lib
     end
   elsif RUBY_PLATFORM=~/darwin/
-    versions="/Library/Frameworks/R.framework/Versions"
-    if File.directory? versions  
-        $prefix=Dir[versions+"/*/Resources"].select{|e| e.split("/")[-2]!="Current"}
-        $prefix_include=$prefix.map{|e| e+"/include"}
-        $prefix_lib=$prefix.map{|e| e+"/lib"}
-        $versions=$prefix.map{|e| e.split("/")[-2]}
-    else
+    
+    # versions="/Library/Frameworks/R.framework/Versions"
+    # if File.directory? versions  
+    #     $prefix=Dir[versions+"/*/Resources"].select{|e| e.split("/")[-2]!="Current"}
+    #     $prefix_include=$prefix.map{|e| e+"/include"}
+    #     $prefix_lib=$prefix.map{|e| e+"/lib"}
+    #     $versions=$prefix.map{|e| e.split("/")[-2]}
+    # else
         $prefix=`R RHOME`.strip
         $prefix_include=$prefix+"/include"
         $prefix_lib=$prefix+"/lib"
-    end
+    # end
     
   else
     stddirs=["/usr/local/lib/R","/usr/lib/R","/usr/share/R","/usr/include/R","/usr/lib64/R"]

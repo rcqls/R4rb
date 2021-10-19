@@ -33,6 +33,7 @@ module R2rb
         @name=name
         @type="expr"
       end
+      ##p [:RVector, @name, @type]
       return self
     end
 
@@ -47,10 +48,11 @@ module R2rb
       return self
     end
    
-    def >(arr)
+    def >(arr) 
       res=self.get
+
 #puts "res";p @name;p res
-      if res
+      unless res.nil?
 #puts "arr.class:";p arr.class
 #puts "res.class";p res.class
         res=[res] unless res.is_a? Array
