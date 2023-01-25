@@ -2,7 +2,7 @@ require 'rubygems'
 require 'rubygems/package_task'
 
 pkg_NAME='R4rb'
-pkg_VERSION='1.1.2'
+pkg_VERSION='1.1.4'
 pkg_FILES=FileList[
     'Rakefile','R4rb.gemspec',
     'ext/R4rb/*.c',
@@ -18,6 +18,7 @@ spec = Gem::Specification.new do |s|
     s.summary = "R for ruby"
     s.name = pkg_NAME
     s.version = pkg_VERSION
+    s.licenses = ['MIT', 'GPL-2.0']
     s.requirements << 'none'
     s.require_paths = ["lib","ext/R4rb"]
     s.files = pkg_FILES.to_a
@@ -28,5 +29,4 @@ spec = Gem::Specification.new do |s|
     s.author = "CQLS"
     s.email= "rdrouilh@gmail.com"
     s.homepage = "http://cqls.upmf-grenoble.fr"
-    s.rubyforge_project = nil
 end

@@ -112,7 +112,7 @@ def find_installed_R
     dirs=["/usr/lib/R","/usr/local/lib/R","/usr/lib64/R","/usr/local/lib64/R"]
    
     dirs.each do |dir|
-      if FileTest.exists?(dir)
+      if FileTest.exist?(dir)
         return dir
       end
     end

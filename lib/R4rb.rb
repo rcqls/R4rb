@@ -7,7 +7,7 @@ if RUBY_PLATFORM=~/mingw32/ #because I did not manage to execute the same on min
   #   	cmd="Rscript.exe"
   #   	version=`#{cmd} -e "cat(R.version$major,R.version$minor,sep='.')"`
   #   else 
-  #   	if File.exists? (jsonfile=File.join(ENV["HOME"],"dyndoc","studio","win32","dyndoc.json"))
+  #   	if File.exist? (jsonfile=File.join(ENV["HOME"],"dyndoc","studio","win32","dyndoc.json"))
 		#    require 'json'
 		#    version=JSON.parse(File.read(jsonfile))["Rversion"]
 		# end
@@ -23,7 +23,7 @@ found=nil
 [".bundle",".so"].each do |ext|
 	["","../ext/R4rb"].each do |path| #sometimes in lib sometimes in ext/R4rb/
 		lib=File.join(File.dirname(__FILE__),path,'R4rb'+(version ? '.'+version+ext : ext ) )
-		if File.exists? lib
+		if File.exist? lib
 			puts "#{lib} found"
 			require lib
 			puts "#{lib} loaded"
@@ -38,7 +38,7 @@ end
 # 	["i386","x64"].each do |version|
 # 		["","../ext/R4rb"].each do |path|
 # 			lib=File.join(File.dirname(__FILE__),path,'R4rb.'+version+'.so')
-# 			if File.exists? lib
+# 			if File.exist? lib
 # 				puts "#{lib} found"
 # 				require lib
 # 				found=true

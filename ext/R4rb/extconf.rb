@@ -12,7 +12,7 @@ def find_installed_R
     $prefix_include=$prefix+"/include"
     $prefix_lib=nil
     (RUBY_PLATFORM=~/64/ ? ["","x64"] : ["","i386"]).each do |arch|
-        $prefix_lib=File.join($prefix,"bin",arch) if File.exists? File.join($prefix,"bin",arch,"R.dll")
+        $prefix_lib=File.join($prefix,"bin",arch) if File.exist? File.join($prefix,"bin",arch,"R.dll")
         #$versions=[arch]
         break if $prefix_lib
     end
@@ -47,19 +47,19 @@ def find_installed_R
 
     dirs.each do |dir|
         p dir
-        if !$prefix and FileTest.exists?(dir)
+        if !$prefix and FileTest.exist?(dir)
             $prefix = dir[0..-3]
         end
     
-        if !$prefix_include and FileTest.exists?(dir+"/include/R.h")
+        if !$prefix_include and FileTest.exist?(dir+"/include/R.h")
             $prefix_include=dir+"/include"
         end
 
-        if !$prefix_include and FileTest.exists?(dir+"/R.h")
+        if !$prefix_include and FileTest.exist?(dir+"/R.h")
             $prefix_include=dir
         end
     
-        if !$prefix_lib and FileTest.exists?(dir+"/lib/libR.so")
+        if !$prefix_lib and FileTest.exist?(dir+"/lib/libR.so")
             $prefix_lib=dir+"/lib"
         end 
     end
@@ -73,7 +73,7 @@ end
 
 
 def r4rb_makefile(inc,lib,version=nil) 
-    $CFLAGS = "-I"+inc+" -I."
+    $CFLAGS = "-fdeclspec -I"+inc+" -I."
     $LDFLAGS = "-L"+lib if lib
     $libs = "-lR"
  
